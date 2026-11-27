@@ -1,4 +1,4 @@
-# Cloudflare Pages response headers. The site uses no JavaScript, no external
+# Cloudflare response headers (Workers static assets). The site uses no JavaScript, no external
 # fonts and no third-party requests, so the Content Security Policy is strict.
 # If Cloudflare Web Analytics is ever enabled, add
 #   script-src https://static.cloudflareinsights.com; connect-src https://cloudflareinsights.com
@@ -16,7 +16,3 @@
 
 /.well-known/security.txt
   Content-Type: text/plain; charset=utf-8
-
-# Keep preview and *.pages.dev copies out of search engines; only the custom domain is indexed.
-https://:project.pages.dev/*
-  X-Robots-Tag: noindex
