@@ -10,5 +10,7 @@
     "not_found_handling": "404-page",
     // /about and /about/ both serve site/about/index.html.
     "html_handling": "auto-trailing-slash"
-  }
+  },
+  // Needed by `wrangler preview`, which Workers Builds runs for branches other than main.
+  "previews": {}
 }
