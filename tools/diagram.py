@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """Generate the home-page edge diagram (two inline SVG variants: wide and compact).
 
-Writes src/partials/edge-diagram.html. Python 3 standard library only.
+Writes src/partials/edge-diagram.html, or the file given as the first argument
+(tools/check_site.py uses that to compare). Python 3 standard library only.
 The SVG uses presentation attributes and classes only (no inline style),
 so it works under the site's Content Security Policy.
 """
 import pathlib
 import random
+import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = ROOT / "src" / "partials" / "edge-diagram.html"
+OUT = pathlib.Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ROOT / "src" / "partials" / "edge-diagram.html"
 
 random.seed(7)  # deterministic output
 
@@ -116,7 +118,7 @@ def compact():
 def main():
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(wide() + "\n" + compact() + "\n", encoding="utf-8")
-    print("wrote", OUT.relative_to(ROOT))
+    print("wrote", OUT.relative_to(ROOT) if OUT.is_relative_to(ROOT) else OUT)
 
 
 if __name__ == "__main__":
