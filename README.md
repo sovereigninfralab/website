@@ -13,6 +13,24 @@ The published site is plain HTML and CSS in `site/`, committed as is. There is n
 - `site/_headers` sets the security headers (HSTS, Content Security Policy and others).
 - `site/.well-known/security.txt` is the security contact (RFC 9116). Renew its `Expires` date before it lapses.
 
+## Checks
+
+`tools/check_site.py` (standard library only, no network) checks that:
+
+- `site/` matches a fresh run of `tools/diagram.py` and `tools/build.py`, so no page was edited by hand or left unbuilt;
+- every internal link, `#fragment`, `aria-labelledby` reference, stylesheet font and sitemap entry resolves;
+- no page uses `<script>`, `<style>` or `style=""`, or loads anything from another site, all of which the Content Security Policy would block;
+- `site/_headers` still sets the security headers;
+- `security.txt` has a Contact field and an `Expires` date between 60 days and a year away.
+
+Run it before committing:
+
+```sh
+python3 tools/check_site.py
+```
+
+GitHub Actions runs it on every pull request, on every push to `main` and every Monday (`.github/workflows/site-check.yml`), with read-only permissions and the checkout action pinned to a commit. Dependabot proposes updates to that pin (`.github/dependabot.yml`), waiting seven days after each release.
+
 ## Deploying (Cloudflare Workers)
 
 The site is served by a Cloudflare Worker named `website` with static assets only (no Worker script). Its settings are in `wrangler.jsonc`:
