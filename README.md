@@ -19,6 +19,8 @@ The site is served by a Cloudflare Worker named `website` with static assets onl
 
 - `assets.directory` is `./site`.
 - `not_found_handling: "404-page"` serves `site/404.html` with status 404.
+- `workers_dev: false` and `preview_urls: false`: the site is served only on its custom domains. There is no copy at the account's `workers.dev` address and no public URL for each uploaded version.
+- `previews: {}`: Workers Builds creates a branch Preview for each pull request and comments its URL on the pull request.
 
 Cloudflare Workers Builds is connected to this repository and runs `npx wrangler deploy` on every push to `main`; there is no build command.
 
