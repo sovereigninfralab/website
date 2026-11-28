@@ -11,3 +11,4 @@ All notable changes to this repository are recorded here. The format follows [Ke
 - Site published at https://sovereigninfralab.com through a Cloudflare Worker with static assets (November 26, 2026). Added `wrangler.jsonc` so missing pages show the site's 404 page and the deploy settings live in the repository.
 - Turned off the `workers.dev` copy of the site and public Version URLs (November 28, 2026), so the site is served only at sovereigninfralab.com and www.
 - Added `tools/check_site.py` and a GitHub Actions workflow that runs it on every pull request, push to `main` and weekly (November 28, 2026): checks that `site/` is rebuilt from `src/`, internal links, Content Security Policy fit, security headers and the `security.txt` expiry date. Dependabot keeps the pinned action up to date. `tools/diagram.py` now accepts an output path.
+- Research page names the open-source toolkit Headgate and links to its renamed repository (November 28, 2026).
