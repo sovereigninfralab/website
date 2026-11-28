@@ -4,6 +4,11 @@
 {
   "name": "website",
   "compatibility_date": "2026-11-23",
+  // Serve the site only on its custom domains (sovereigninfralab.com and www).
+  // No copy at website.<account>.workers.dev.
+  "workers_dev": false,
+  // No public Version URLs for individual uploads.
+  "preview_urls": false,
   "assets": {
     "directory": "./site",
     // Serve site/404.html, with HTTP status 404, for paths that do not exist.
@@ -11,6 +16,8 @@
     // /about and /about/ both serve site/about/index.html.
     "html_handling": "auto-trailing-slash"
   },
-  // Needed by `wrangler preview`, which Workers Builds runs for branches other than main.
+  // Branch Previews for pull requests. Workers Builds runs `wrangler preview` for
+  // branches other than main, which needs this block. Previews have their own
+  // settings and do not inherit the production settings above.
   "previews": {}
 }
